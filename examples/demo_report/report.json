@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "audit_id": "PD-20260720-517C4B1C",
+  "generated_at": "2026-07-20T22:41:44Z",
+  "repository": "demo_repository",
+  "client": "Demo klienta",
+  "coverage": {
+    "status": "complete",
+    "scanned_files": 4,
+    "scanned_bytes": 555,
+    "text_files_scanned": 3,
+    "text_files_omitted": 0,
+    "skipped": {},
+    "limits": {
+      "max_files": 10000,
+      "max_total_bytes": 262144000,
+      "max_file_bytes": 2097152
+    }
+  },
+  "inventory": {
+    "file_count": 4,
+    "source_file_count": 1,
+    "test_file_count": 0,
+    "source_line_count": 19,
+    "languages": {
+      "Python": 1
+    },
+    "extensions": {
+      ".md": 1,
+      ".py": 1,
+      ".txt": 1,
+      "[brak rozszerzenia]": 1
+    }
+  },
+  "checks": [
+    {
+      "id": "docs.readme",
+      "status": "pass",
+      "severity": "info",
+      "message": "Znaleziono główny README.",
+      "evidence": [
+        "README.md"
+      ],
+      "recommendation": ""
+    },
+    {
+      "id": "docs.license",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak jednoznacznej licencji",
+      "evidence": [],
+      "recommendation": "Dodaj licencję lub jasno określ warunki użycia kodu."
+    },
+    {
+      "id": "docs.changelog",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak changelogu",
+      "evidence": [],
+      "recommendation": "Dodaj prosty changelog, aby klient wiedział, co zmieniło się między wydaniami."
+    },
+    {
+      "id": "docs.contributing",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak wskazówek dla współtwórców",
+      "evidence": [],
+      "recommendation": "Dodaj krótkie zasady instalacji, testów i zgłaszania zmian."
+    },
+    {
+      "id": "hygiene.gitignore",
+      "status": "pass",
+      "severity": "info",
+      "message": "Znaleziono wymagany artefakt.",
+      "evidence": [
+        ".gitignore"
+      ],
+      "recommendation": ""
+    },
+    {
+      "id": "dependencies.manifest",
+      "status": "pass",
+      "severity": "info",
+      "message": "Znaleziono manifest zależności.",
+      "evidence": [
+        "requirements.txt"
+      ],
+      "recommendation": ""
+    },
+    {
+      "id": "dependencies.lock",
+      "status": "warn",
+      "severity": "low",
+      "message": "Nie znaleziono pliku blokady zależności.",
+      "evidence": [],
+      "recommendation": "Tam, gdzie to możliwe, dodaj lockfile lub przypięte wersje zależności."
+    },
+    {
+      "id": "tests.discovered",
+      "status": "warn",
+      "severity": "high",
+      "message": "Nie znaleziono rozpoznawalnych plików testowych.",
+      "evidence": [],
+      "recommendation": "Dodaj testy najważniejszych ścieżek działania oraz uruchamiaj je w CI."
+    },
+    {
+      "id": "ci.workflow",
+      "status": "warn",
+      "severity": "low",
+      "message": "Nie znaleziono workflow CI.",
+      "evidence": [],
+      "recommendation": "Dodaj prosty workflow uruchamiający testy i kontrolę formatowania."
+    },
+    {
+      "id": "repository.git",
+      "status": "not_run",
+      "severity": "info",
+      "message": "Nie potwierdzono metadanych Git w przekazanym katalogu.",
+      "evidence": [],
+      "recommendation": "Jeśli to źródła projektu, trzymaj je w repozytorium Git."
+    },
+    {
+      "id": "execution.tests",
+      "status": "not_run",
+      "severity": "info",
+      "message": "Testy, instalacja zależności i kod projektu nie były uruchamiane.",
+      "evidence": [],
+      "recommendation": "To świadoma granica bezpieczeństwa audytu statycznego; wykonanie dodaj tylko w izolowanym CI/sandboxie."
+    }
+  ],
+  "score": {
+    "value": 45,
+    "label": "podwyższone ryzyko",
+    "method": "100 minus jawne kary za statyczne znaleziska; wynik nie jest certyfikatem bezpieczeństwa.",
+    "findings_by_severity": {
+      "critical": 0,
+      "high": 2,
+      "medium": 1,
+      "low": 6,
+      "info": 1
+    }
+  },
+  "findings": [
+    {
+      "rule_id": "python.subprocess-shell",
+      "severity": "high",
+      "category": "bezpieczeństwo",
+      "title": "Znaleziono subprocess z shell=True",
+      "evidence": [
+        "src/service.py"
+      ],
+      "recommendation": "Przekazuj listę argumentów i unikaj shell=True dla danych, które mogą pochodzić od użytkownika.",
+      "status": "open"
+    },
+    {
+      "rule_id": "tests.none-discovered",
+      "severity": "high",
+      "category": "testy",
+      "title": "Nie znaleziono testów",
+      "evidence": [],
+      "recommendation": "Dodaj przynajmniej testy krytycznych funkcji i konfiguracji.",
+      "status": "open"
+    },
+    {
+      "rule_id": "security.plain-http",
+      "severity": "medium",
+      "category": "bezpieczeństwo",
+      "title": "Znaleziono adres HTTP bez TLS",
+      "evidence": [
+        "src/service.py"
+      ],
+      "recommendation": "Użyj HTTPS, chyba że komunikacja jest świadomie ograniczona do bezpiecznej sieci lokalnej.",
+      "status": "open"
+    },
+    {
+      "rule_id": "python.bare-except",
+      "severity": "low",
+      "category": "bezpieczeństwo",
+      "title": "Ogólny except utrudnia diagnozowanie błędów",
+      "evidence": [
+        "src/service.py"
+      ],
+      "recommendation": "Łap jawne wyjątki i loguj przyczynę błędu.",
+      "status": "open"
+    },
+    {
+      "rule_id": "docs.changelog.missing",
+      "severity": "low",
+      "category": "dokumentacja",
+      "title": "Brak changelogu",
+      "evidence": [],
+      "recommendation": "Dodaj prosty changelog, aby klient wiedział, co zmieniło się między wydaniami.",
+      "status": "open"
+    },
+    {
+      "rule_id": "docs.contributing.missing",
+      "severity": "low",
+      "category": "dokumentacja",
+      "title": "Brak wskazówek dla współtwórców",
+      "evidence": [],
+      "recommendation": "Dodaj krótkie zasady instalacji, testów i zgłaszania zmian.",
+      "status": "open"
+    },
+    {
+      "rule_id": "docs.license.missing",
+      "severity": "low",
+      "category": "dokumentacja",
+      "title": "Brak jednoznacznej licencji",
+      "evidence": [],
+      "recommendation": "Dodaj licencję lub jasno określ warunki użycia kodu.",
+      "status": "open"
+    },
+    {
+      "rule_id": "ci.no-workflow",
+      "severity": "low",
+      "category": "dostarczanie",
+      "title": "Brak widocznego workflow CI",
+      "evidence": [],
+      "recommendation": "Dodaj minimalny workflow CI, który uruchamia testy przy zmianach.",
+      "status": "open"
+    },
+    {
+      "rule_id": "dependencies.missing-lock",
+      "severity": "low",
+      "category": "zależności",
+      "title": "Brak pliku blokady zależności",
+      "evidence": [],
+      "recommendation": "Dodaj lockfile albo używaj przypiętych wersji, aby ograniczyć różnice między środowiskami.",
+      "status": "open"
+    },
+    {
+      "rule_id": "quality.todo-marker",
+      "severity": "info",
+      "category": "jakość kodu",
+      "title": "Pozostały oznaczenia TODO/FIXME",
+      "evidence": [
+        "src/service.py"
+      ],
+      "recommendation": "Przejrzyj oznaczenia i przekształć istotne zadania w elementy backlogu.",
+      "status": "open"
+    }
+  ],
+  "limitations": [
+    "Audyt jest statyczny: nie uruchamia kodu, testów, instalatorów ani poleceń Git klienta.",
+    "Raport nie jest pentestem ani gwarancją braku podatności.",
+    "Zawartość plików z nazwami sugerującymi sekret nie jest odczytywana; raport zawiera wyłącznie względne ścieżki i typy znalezisk.",
+    "Testy są tylko wykrywane, nigdy uruchamiane. Wynik 'not_run' nie oznacza powodzenia testów."
+  ]
+}

@@ -1,0 +1,29 @@
+TYTUŁ:
+Zbudowałem audytor repo Python — puściłem go na `requests`, co wykryło? (18/100)
+
+TREŚĆ:
+Od jakiegoś czasu piszę małe narzędzie (Project Doctor), które robi statyczny
+przegląd repozytorium Python/AI: struktura, testy, CI, sekrety, ryzyka w kodzie
+(eval/exec/pickle/shell=True/HTTP bez TLS). Nie uruchamia kodu ani testów klienta.
+
+Żeby sprawdzić, czy w ogóle działa, puściłem je na `psf/requests` (najpopularniejsza
+biblioteka HTTP). Wynik: 18/100.
+
+Co wykryło (przykłady z raportu):
+- HIGH: odczyt pickle
+- HIGH: pliki mogące zawierać poświadczenia
+- MEDIUM: adresy HTTP bez TLS (w przykładach/testach)
+- brak lockfile zależności, brak CI workflow w samym pakiecie
+
+Zastrzeżenie: to NIE jest ocena bezpieczeństwa `requests`. Biblioteka jest świetna.
+Narzędzie po prostu zgłasza rzeczy, które w *twoim* projekcie warto przejrzeć —
+tu wyłapało sporo w testach/przykładach, co w production nie przeszkadza.
+
+Pełny raport (same wyniki, bez kodu):
+https://github.com/famatyyk/project-doctor-samples/blob/main/samples/requests-audit.md
+
+Pytanie do Was: co byście jeszcze chcieli, żeby takie narzędzie sprawdzało?
+Myślę nad dodaniem opcjonalnego uruchamiania testów w sandboxie i miesięcznego re-checku.
+
+(Narzędzie jest płatne jako usługa audytu od 19 EUR, ale ten post to głównie
+czysta ciekawość — co umknęło w projektach, które znamy.)
