@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "audit_id": "PD-20260807-63571394",
+  "generated_at": "2026-08-07T23:20:35Z",
+  "repository": "demo_cpp",
+  "client": null,
+  "coverage": {
+    "status": "complete",
+    "scanned_files": 1,
+    "scanned_bytes": 360,
+    "text_files_scanned": 1,
+    "text_files_omitted": 0,
+    "skipped": {},
+    "limits": {
+      "max_files": 10000,
+      "max_total_bytes": 262144000,
+      "max_file_bytes": 2097152
+    }
+  },
+  "inventory": {
+    "file_count": 1,
+    "source_file_count": 1,
+    "test_file_count": 0,
+    "source_line_count": 13,
+    "languages": {
+      "C++": 2
+    },
+    "extensions": {
+      ".cpp": 1
+    }
+  },
+  "checks": [
+    {
+      "id": "docs.readme",
+      "status": "warn",
+      "severity": "high",
+      "message": "Brak głównego README.",
+      "evidence": [],
+      "recommendation": "Dodaj krótki opis, instalację, uruchomienie i sposób testowania projektu."
+    },
+    {
+      "id": "docs.license",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak jednoznacznej licencji",
+      "evidence": [],
+      "recommendation": "Dodaj licencję lub jasno określ warunki użycia kodu."
+    },
+    {
+      "id": "docs.changelog",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak changelogu",
+      "evidence": [],
+      "recommendation": "Dodaj prosty changelog, aby klient wiedział, co zmieniło się między wydaniami."
+    },
+    {
+      "id": "docs.contributing",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak wskazówek dla współtwórców",
+      "evidence": [],
+      "recommendation": "Dodaj krótkie zasady instalacji, testów i zgłaszania zmian."
+    },
+    {
+      "id": "hygiene.gitignore",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak .gitignore",
+      "evidence": [],
+      "recommendation": "Dodaj .gitignore dla sekretów, cache, środowisk wirtualnych i artefaktów builda."
+    },
+    {
+      "id": "dependencies.manifest",
+      "status": "warn",
+      "severity": "medium",
+      "message": "Nie znaleziono manifestu zależności.",
+      "evidence": [],
+      "recommendation": "Dodaj pyproject.toml, requirements.txt lub odpowiedni manifest ekosystemu."
+    },
+    {
+      "id": "tests.discovered",
+      "status": "warn",
+      "severity": "high",
+      "message": "Nie znaleziono rozpoznawalnych plików testowych.",
+      "evidence": [],
+      "recommendation": "Dodaj testy najważniejszych ścieżek działania oraz uruchamiaj je w CI."
+    },
+    {
+      "id": "ci.workflow",
+      "status": "warn",
+      "severity": "low",
+      "message": "Nie znaleziono workflow CI.",
+      "evidence": [],
+      "recommendation": "Dodaj prosty workflow uruchamiający testy i kontrolę formatowania."
+    },
+    {
+      "id": "repository.git",
+      "status": "not_run",
+      "severity": "info",
+      "message": "Nie potwierdzono metadanych Git w przekazanym katalogu.",
+      "evidence": [],
+      "recommendation": "Jeśli to źródła projektu, trzymaj je w repozytorium Git."
+    },
+    {
+      "id": "execution.tests",
+      "status": "not_run",
+      "severity": "info",
+      "message": "Testy, instalacja zależności i kod projektu nie były uruchamiane.",
+      "evidence": [],
+      "recommendation": "To świadoma granica bezpieczeństwa audytu statycznego; wykonanie dodaj tylko w izolowanym CI/sandboxie."
+    }
+  ],
+  "score": {
+    "value": 16,
+    "label": "podwyższone ryzyko",
+    "method": "100 minus jawne kary za statyczne znaleziska; wynik nie jest certyfikatem bezpieczeństwa.",
+    "findings_by_severity": {
+      "critical": 0,
+      "high": 3,
+      "medium": 3,
+      "low": 6,
+      "info": 0
+    }
+  },
+  "findings": [
+    {
+      "rule_id": "docs.missing-readme",
+      "severity": "high",
+      "category": "dokumentacja",
+      "title": "Brak głównego README",
+      "evidence": [],
+      "recommendation": "Dodaj README z opisem produktu, konfiguracją i podstawową instrukcją uruchomienia.",
+      "status": "open"
+    },
+    {
+      "rule_id": "cxx.cxx.unsafe-func",
+      "severity": "high",
+      "category": "jakość kodu C++",
+      "title": "Funkcja C uznawana za niebezpieczną (strcpy/strcat/gets/scanf/sprintf)",
+      "evidence": [
+        "main.cpp"
+      ],
+      "recommendation": "Użyj bezpiecznych odpowiedników: std::string, std::format, snprintf z kontrolą rozmiaru.",
+      "status": "open"
+    },
+    {
+      "rule_id": "tests.none-discovered",
+      "severity": "high",
+      "category": "testy",
+      "title": "Nie znaleziono testów",
+      "evidence": [],
+      "recommendation": "Dodaj przynajmniej testy krytycznych funkcji i konfiguracji.",
+      "status": "open"
+    },
+    {
+      "rule_id": "hygiene.gitignore.missing",
+      "severity": "medium",
+      "category": "higiena repozytorium",
+      "title": "Brak .gitignore",
+      "evidence": [],
+      "recommendation": "Dodaj .gitignore dla sekretów, cache, środowisk wirtualnych i artefaktów builda.",
+      "status": "open"
+    },
+    {
+      "rule_id": "cxx.cxx.raw-new-no-delete",
+      "severity": "medium",
+      "category": "jakość kodu C++",
+      "title": "Surowe `new` bez widocznego zarządzania pamięcią",
+      "evidence": [
+        "main.cpp"
+      ],
+      "recommendation": "Użyj std::unique_ptr / std::shared_ptr zamiast surowego new, by uniknąć wycieków.",
+      "status": "open"
+    },
+    {
+      "rule_id": "dependencies.missing-manifest",
+      "severity": "medium",
+      "category": "zależności",
+      "title": "Brak manifestu zależności",
+      "evidence": [],
+      "recommendation": "Dodaj śledzony manifest zależności, aby instalacja była powtarzalna.",
+      "status": "open"
+    },
+    {
+      "rule_id": "docs.changelog.missing",
+      "severity": "low",
+      "category": "dokumentacja",
+      "title": "Brak changelogu",
+      "evidence": [],
+      "recommendation": "Dodaj prosty changelog, aby klient wiedział, co zmieniło się między wydaniami.",
+      "status": "open"
+    },
+    {
+      "rule_id": "docs.contributing.missing",
+      "severity": "low",
+      "category": "dokumentacja",
+      "title": "Brak wskazówek dla współtwórców",
+      "evidence": [],
+      "recommendation": "Dodaj krótkie zasady instalacji, testów i zgłaszania zmian.",
+      "status": "open"
+    },
+    {
+      "rule_id": "docs.license.missing",
+      "severity": "low",
+      "category": "dokumentacja",
+      "title": "Brak jednoznacznej licencji",
+      "evidence": [],
+      "recommendation": "Dodaj licencję lub jasno określ warunki użycia kodu.",
+      "status": "open"
+    },
+    {
+      "rule_id": "ci.no-workflow",
+      "severity": "low",
+      "category": "dostarczanie",
+      "title": "Brak widocznego workflow CI",
+      "evidence": [],
+      "recommendation": "Dodaj minimalny workflow CI, który uruchamia testy przy zmianach.",
+      "status": "open"
+    },
+    {
+      "rule_id": "cxx.cxx.c-style-cast",
+      "severity": "low",
+      "category": "jakość kodu C++",
+      "title": "Rzutowanie w stylu C",
+      "evidence": [
+        "main.cpp"
+      ],
+      "recommendation": "Wolaj statycznych rzutowań C++ (static_cast / const_cast) dla lepszej czytelności i bezpieczeństwa typów.",
+      "status": "open"
+    },
+    {
+      "rule_id": "cxx.cxx.goto",
+      "severity": "low",
+      "category": "jakość kodu C++",
+      "title": "Użyto instrukcji goto",
+      "evidence": [
+        "main.cpp"
+      ],
+      "recommendation": "Unikaj goto; zamiast tego użyj pętli, funkcji lub std::expected do sterowania przepływem.",
+      "status": "open"
+    }
+  ],
+  "limitations": [
+    "Audyt jest statyczny: nie uruchamia kodu, testów, instalatorów ani poleceń Git klienta.",
+    "Raport nie jest pentestem ani gwarancją braku podatności.",
+    "Zawartość plików z nazwami sugerującymi sekret nie jest odczytywana; raport zawiera wyłącznie względne ścieżki i typy znalezisk.",
+    "Testy są tylko wykrywane, nigdy uruchamiane. Wynik 'not_run' nie oznacza powodzenia testów."
+  ]
+}

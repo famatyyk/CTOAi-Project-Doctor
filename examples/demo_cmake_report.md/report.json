@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "audit_id": "PD-20260808-193A6352",
+  "generated_at": "2026-08-08T06:20:51Z",
+  "repository": "demo_cmake",
+  "client": null,
+  "coverage": {
+    "status": "complete",
+    "scanned_files": 1,
+    "scanned_bytes": 246,
+    "text_files_scanned": 1,
+    "text_files_omitted": 0,
+    "skipped": {},
+    "limits": {
+      "max_files": 10000,
+      "max_total_bytes": 262144000,
+      "max_file_bytes": 2097152
+    }
+  },
+  "inventory": {
+    "file_count": 1,
+    "source_file_count": 0,
+    "test_file_count": 0,
+    "source_line_count": 0,
+    "languages": {
+      "C++ build": 1
+    },
+    "extensions": {
+      ".txt": 1
+    }
+  },
+  "checks": [
+    {
+      "id": "docs.readme",
+      "status": "warn",
+      "severity": "high",
+      "message": "Brak głównego README.",
+      "evidence": [],
+      "recommendation": "Dodaj krótki opis, instalację, uruchomienie i sposób testowania projektu."
+    },
+    {
+      "id": "docs.license",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak jednoznacznej licencji",
+      "evidence": [],
+      "recommendation": "Dodaj licencję lub jasno określ warunki użycia kodu."
+    },
+    {
+      "id": "docs.changelog",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak changelogu",
+      "evidence": [],
+      "recommendation": "Dodaj prosty changelog, aby klient wiedział, co zmieniło się między wydaniami."
+    },
+    {
+      "id": "docs.contributing",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak wskazówek dla współtwórców",
+      "evidence": [],
+      "recommendation": "Dodaj krótkie zasady instalacji, testów i zgłaszania zmian."
+    },
+    {
+      "id": "hygiene.gitignore",
+      "status": "warn",
+      "severity": "low",
+      "message": "Brak .gitignore",
+      "evidence": [],
+      "recommendation": "Dodaj .gitignore dla sekretów, cache, środowisk wirtualnych i artefaktów builda."
+    },
+    {
+      "id": "dependencies.manifest",
+      "status": "warn",
+      "severity": "medium",
+      "message": "Nie znaleziono manifestu zależności.",
+      "evidence": [],
+      "recommendation": "Dodaj pyproject.toml, requirements.txt lub odpowiedni manifest ekosystemu."
+    },
+    {
+      "id": "tests.discovered",
+      "status": "warn",
+      "severity": "high",
+      "message": "Nie znaleziono rozpoznawalnych plików testowych.",
+      "evidence": [],
+      "recommendation": "Dodaj testy najważniejszych ścieżek działania oraz uruchamiaj je w CI."
+    },
+    {
+      "id": "ci.workflow",
+      "status": "warn",
+      "severity": "low",
+      "message": "Nie znaleziono workflow CI.",
+      "evidence": [],
+      "recommendation": "Dodaj prosty workflow uruchamiający testy i kontrolę formatowania."
+    },
+    {
+      "id": "repository.git",
+      "status": "not_run",
+      "severity": "info",
+      "message": "Nie potwierdzono metadanych Git w przekazanym katalogu.",
+      "evidence": [],
+      "recommendation": "Jeśli to źródła projektu, trzymaj je w repozytorium Git."
+    },
+    {
+      "id": "execution.tests",
+      "status": "not_run",
+      "severity": "info",
+      "message": "Testy, instalacja zależności i kod projektu nie były uruchamiane.",
+      "evidence": [],
+      "recommendation": "To świadoma granica bezpieczeństwa audytu statycznego; wykonanie dodaj tylko w izolowanym CI/sandboxie."
+    }
+  ],
+  "score": {
+    "value": 35,
+    "label": "podwyższone ryzyko",
+    "method": "100 minus jawne kary za statyczne znaleziska; wynik nie jest certyfikatem bezpieczeństwa.",
+    "findings_by_severity": {
+      "critical": 0,
+      "high": 2,
+      "medium": 2,
+      "low": 7,
+      "info": 0
+    }
+  },
+  "findings": [
+    {
+      "rule_id": "docs.missing-readme",
+      "severity": "high",
+      "category": "dokumentacja",
+      "title": "Brak głównego README",
+      "evidence": [],
+      "recommendation": "Dodaj README z opisem produktu, konfiguracją i podstawową instrukcją uruchomienia.",
+      "status": "open"
+    },
+    {
+      "rule_id": "tests.none-discovered",
+      "severity": "high",
+      "category": "testy",
+      "title": "Nie znaleziono testów",
+      "evidence": [],
+      "recommendation": "Dodaj przynajmniej testy krytycznych funkcji i konfiguracji.",
+      "status": "open"
+    },
+    {
+      "rule_id": "hygiene.gitignore.missing",
+      "severity": "medium",
+      "category": "higiena repozytorium",
+      "title": "Brak .gitignore",
+      "evidence": [],
+      "recommendation": "Dodaj .gitignore dla sekretów, cache, środowisk wirtualnych i artefaktów builda.",
+      "status": "open"
+    },
+    {
+      "rule_id": "dependencies.missing-manifest",
+      "severity": "medium",
+      "category": "zależności",
+      "title": "Brak manifestu zależności",
+      "evidence": [],
+      "recommendation": "Dodaj śledzony manifest zależności, aby instalacja była powtarzalna.",
+      "status": "open"
+    },
+    {
+      "rule_id": "build.cmake-global-include",
+      "severity": "low",
+      "category": "build C++",
+      "title": "Użyto globalnego include_directories()",
+      "evidence": [
+        "CMakeLists.txt"
+      ],
+      "recommendation": "Preferuj target_include_directories(<tgt> PRIVATE/PUBLIC) — izoluj zależności.",
+      "status": "open"
+    },
+    {
+      "rule_id": "build.cmake-global-standard",
+      "severity": "low",
+      "category": "build C++",
+      "title": "Ustawiono globalne CMAKE_CXX_STANDARD bez target_compile_features",
+      "evidence": [
+        "CMakeLists.txt"
+      ],
+      "recommendation": "Użyj target_compile_features(<tgt> PRIVATE cxx_std_17) dla jawnych wymagań per-target.",
+      "status": "open"
+    },
+    {
+      "rule_id": "build.cmake-hardcoded-opt",
+      "severity": "low",
+      "category": "build C++",
+      "title": "Hardkodowane -O3 w add_compile_options",
+      "evidence": [
+        "CMakeLists.txt"
+      ],
+      "recommendation": "Nie wymuszaj optymalizacji globalnie; steruj przez CMAKE_BUILD_TYPE / presets.",
+      "status": "open"
+    },
+    {
+      "rule_id": "docs.changelog.missing",
+      "severity": "low",
+      "category": "dokumentacja",
+      "title": "Brak changelogu",
+      "evidence": [],
+      "recommendation": "Dodaj prosty changelog, aby klient wiedział, co zmieniło się między wydaniami.",
+      "status": "open"
+    },
+    {
+      "rule_id": "docs.contributing.missing",
+      "severity": "low",
+      "category": "dokumentacja",
+      "title": "Brak wskazówek dla współtwórców",
+      "evidence": [],
+      "recommendation": "Dodaj krótkie zasady instalacji, testów i zgłaszania zmian.",
+      "status": "open"
+    },
+    {
+      "rule_id": "docs.license.missing",
+      "severity": "low",
+      "category": "dokumentacja",
+      "title": "Brak jednoznacznej licencji",
+      "evidence": [],
+      "recommendation": "Dodaj licencję lub jasno określ warunki użycia kodu.",
+      "status": "open"
+    },
+    {
+      "rule_id": "ci.no-workflow",
+      "severity": "low",
+      "category": "dostarczanie",
+      "title": "Brak widocznego workflow CI",
+      "evidence": [],
+      "recommendation": "Dodaj minimalny workflow CI, który uruchamia testy przy zmianach.",
+      "status": "open"
+    }
+  ],
+  "limitations": [
+    "Audyt jest statyczny: nie uruchamia kodu, testów, instalatorów ani poleceń Git klienta.",
+    "Raport nie jest pentestem ani gwarancją braku podatności.",
+    "Zawartość plików z nazwami sugerującymi sekret nie jest odczytywana; raport zawiera wyłącznie względne ścieżki i typy znalezisk.",
+    "Testy są tylko wykrywane, nigdy uruchamiane. Wynik 'not_run' nie oznacza powodzenia testów."
+  ]
+}

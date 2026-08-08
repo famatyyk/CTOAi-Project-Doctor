@@ -27,6 +27,7 @@ from .policy import (
 )
 from .safe_fs import FileEntry, WalkResult, read_text_bounded, walk_repository
 from .cpp_lua import analyse_cxx_lua
+from .build_cpp import analyse_build
 
 
 LANGUAGE_NAMES = {
@@ -420,6 +421,8 @@ def _build_result(
         lang = analyse_cxx_lua(entry, content, findings, seen)
         if lang:
             languages[lang] += 1
+        if analyse_build(entry, content, findings, seen):
+            languages["C++ build"] = languages.get("C++ build", 0) + 1
         if entry.path.suffix.lower() in SOURCE_EXTENSIONS:
             source_lines += line_count
 
